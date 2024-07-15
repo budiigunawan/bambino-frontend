@@ -16,7 +16,9 @@ export const ProductCard = ({ product }: ProductCardParams) => {
       <Card className="rounded-none border-0 shadow-none min-h-80">
         <CardHeader className="p-0">
           <img src={product.imageUrl} alt={product.slug} />
-          <CardTitle className="text-xl min-h-14">{product.name}</CardTitle>
+          <CardTitle className="text-xl md:min-h-14 min-h-20">
+            {product.name}
+          </CardTitle>
         </CardHeader>
         <CardContent className="p-0 mt-4">
           <p className="font-semibold">{rupiahFormat(product.price)}</p>

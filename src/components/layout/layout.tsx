@@ -11,7 +11,7 @@ export const Layout = ({ children }: LayoutProps) => {
     <>
       <Navbar />
       <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto">
-        <div className="min-h-[846px]">{children}</div>
+        <div className="lg:min-h-[824px] min-h-[700px]">{children}</div>
       </div>
       <Footer />
     </>
