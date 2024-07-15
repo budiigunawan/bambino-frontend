@@ -8,10 +8,12 @@ type LayoutProps = {
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
-    <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto">
-      <Navbar />
-      <div className="min-h-[800px]">{children}</div>
+    <>
+      <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto">
+        <Navbar />
+        <div className="min-h-[846px]">{children}</div>
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };

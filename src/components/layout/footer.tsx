@@ -1,3 +1,7 @@
 export const Footer = () => {
-  return <h2>This is footer</h2>;
+  return (
+    <div className="h-14 flex justify-center items-center bg-b-gray-light">
+      <p className="text-b-gray-dark">Copyright © Bambino 2024</p>
+    </div>
+  );
 };
