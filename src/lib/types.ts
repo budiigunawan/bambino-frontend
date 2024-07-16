@@ -13,3 +13,8 @@ export type Product = {
   createdAt: string | null;
   updatedAt: string | null;
 };
+
+export type Metadata = {
+  totalData: number;
+  totalPage: number;
+};

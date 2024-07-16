@@ -10,16 +10,21 @@ import {
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { IoSearch } from "react-icons/io5";
-import { Product } from "@/lib/types";
+import { Metadata, Product } from "@/lib/types";
 import { SkeletonCard } from "./skeleton-card";
 import { ProductCard } from "./product-card";
 
 type ProductListParams = {
   products: Product[];
+  metadata: Metadata;
   isLoading: boolean;
 };
 
-export const ProductList = ({ products, isLoading }: ProductListParams) => {
+export const ProductList = ({
+  products,
+  metadata,
+  isLoading,
+}: ProductListParams) => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
   };
@@ -53,7 +58,9 @@ export const ProductList = ({ products, isLoading }: ProductListParams) => {
       {/* Search product */}
       <div className="mt-8 flex justify-between items-center">
         <p className="font-poppins font-semibold text-lg uppercase">
-          {`Results: ${products?.length} items`}
+          {`Results: ${metadata.totalData} ${
+            !metadata.totalData ? "item" : "items"
+          }`}
         </p>
         <form
           onSubmit={handleSearch}
@@ -63,6 +70,7 @@ export const ProductList = ({ products, isLoading }: ProductListParams) => {
             type="text"
             placeholder="Search by collection name"
             className="font-plus focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
+            disabled={isLoading}
           />
           <Button type="submit" variant="outline">
             <IoSearch />
