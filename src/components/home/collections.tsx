@@ -17,12 +17,12 @@ export const Collections = ({ products, isLoading }: CollectionsParams) => {
   };
 
   return (
-    <section>
+    <section className="p-4 md:p-0">
       <h2 className="font-bold font-poppins text-4xl text-b-black text-center uppercase">
         Collection
       </h2>
       {isLoading ? (
-        <div className="my-10 p-4 md:p-0">
+        <div className="my-10">
           <div className="grid gap-x-4 gap-y-8 grid-cols-12">
             {[...Array(8)].map((_e, i) => (
               <SkeletonCard key={i} />
@@ -30,7 +30,7 @@ export const Collections = ({ products, isLoading }: CollectionsParams) => {
           </div>
         </div>
       ) : (
-        <div className="my-10 p-4 md:p-0">
+        <div className="my-10">
           {products?.length === 0 && <h3>Collection is empty</h3>}
           {products?.length > 0 && (
             <>

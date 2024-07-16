@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
@@ -28,6 +27,9 @@ export const ProductList = ({
 }: ProductListParams) => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    console.log(data);
   };
 
   const hanldeViewMore = () => {
@@ -44,9 +46,9 @@ export const ProductList = ({
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink className="uppercase underline">
-              <Link to="/home">Home</Link>
-            </BreadcrumbLink>
+            <Link className="uppercase underline" to="/home">
+              Home
+            </Link>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
           <BreadcrumbItem>
