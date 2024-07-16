@@ -10,25 +10,41 @@ export const Products = () => {
     totalData: 0,
     totalPage: 0,
   });
+  const [limit, setLimit] = useState<number>(10);
+  const [search, setSearch] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getAllProduct();
+  const fetchData = async (
+    page: number = 1,
+    limit: number = 10,
+    search?: string
+  ) => {
+    setIsLoading(true);
 
-      if (response?.status === "success") {
-        setProducts(response?.data?.products);
-        setMetadata({
-          totalData: response?.data?.totalData ?? 0,
-          totalPage: response?.data?.totalPage ?? 0,
-        });
-      }
+    const response = await getAllProduct({ page, limit, q: search });
 
-      setIsLoading(false);
+    if (response?.status === "success") {
+      setProducts(response?.data?.products);
+      setMetadata({
+        totalData: response?.data?.totalData ?? 0,
+        totalPage: response?.data?.totalPage ?? 0,
+      });
     }
 
-    fetchData();
-  }, []);
+    setIsLoading(false);
+  };
+
+  const handleSearch = (value: string) => {
+    setSearch(value ?? "");
+  };
+
+  const handleLimit = (value: number) => {
+    setLimit(value ?? 0);
+  };
+
+  useEffect(() => {
+    fetchData(1, limit, search);
+  }, [limit, search]);
 
   return (
     <Layout>
@@ -36,6 +52,8 @@ export const Products = () => {
         products={products}
         metadata={metadata}
         isLoading={isLoading}
+        setLimit={handleLimit}
+        setSearch={handleSearch}
       />
     </Layout>
   );

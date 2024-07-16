@@ -1,12 +1,22 @@
+import { sanitizeQuery } from "@/lib/helpers";
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_APP_API_BASEURL;
 
-export const getAllProduct = async (page: number = 1, limit: number = 10) => {
+type ProductQuery = {
+  page: number;
+  limit: number;
+  q?: string;
+};
+
+export const getAllProduct = async (query: ProductQuery) => {
   try {
+    const sanitized = sanitizeQuery(query);
+
     const response = await axios({
       method: "GET",
-      url: `${baseUrl}/products?page=${page}&limit=${limit}`,
+      url: `${baseUrl}/products`,
+      params: sanitized,
     });
 
     return response.data;

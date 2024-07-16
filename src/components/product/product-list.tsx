@@ -18,21 +18,26 @@ type ProductListParams = {
   products: Product[];
   metadata: Metadata;
   isLoading: boolean;
+  setLimit: (value: number) => void;
+  setSearch: (value: string) => void;
 };
 
 export const ProductList = ({
   products,
   metadata,
   isLoading,
+  setLimit,
+  setSearch,
 }: ProductListParams) => {
   const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData);
-    console.log(data);
+    const search = formData.get("search") as string;
+    setSearch(search);
   };
 
   const hanldeViewMore = () => {
+    setLimit(20);
     console.log("pagination");
   };
 
@@ -72,10 +77,12 @@ export const ProductList = ({
         </p>
         <form
           onSubmit={handleSearch}
+          method="post"
           className="flex w-full max-w-sm items-center space-x-1"
         >
           <Input
             type="text"
+            name="search"
             placeholder="Search by collection name"
             className="font-plus focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
             disabled={isLoading}
