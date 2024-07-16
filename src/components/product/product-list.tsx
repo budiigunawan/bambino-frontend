@@ -34,7 +34,7 @@ export const ProductList = ({
   };
 
   return (
-    <section className="md:my-20 my-14">
+    <section className="md:my-20 my-14 p-4 md:p-0">
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
@@ -56,7 +56,7 @@ export const ProductList = ({
       </h2>
 
       {/* Search product */}
-      <div className="mt-8 flex justify-between items-center">
+      <div className="mt-8 flex justify-between items-center space-x-4">
         <p className="font-poppins font-semibold text-lg uppercase">
           {`Results: ${metadata.totalData} ${
             !metadata.totalData ? "item" : "items"
@@ -80,7 +80,7 @@ export const ProductList = ({
 
       {/* Product list */}
       {isLoading ? (
-        <div className="my-10 p-4 md:p-0">
+        <div className="my-10">
           <div className="grid gap-x-4 gap-y-8 grid-cols-12">
             {[...Array(8)].map((_e, i) => (
               <SkeletonCard key={i} />
@@ -88,7 +88,7 @@ export const ProductList = ({
           </div>
         </div>
       ) : (
-        <div className="my-10 p-4 md:p-0">
+        <div className="my-10">
           {products?.length === 0 && <h3>Collection is empty</h3>}
           {products?.length > 0 && (
             <>
