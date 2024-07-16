@@ -11,7 +11,7 @@ export const Home = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await getAllProduct();
+      const response = await getAllProduct(1, 8);
 
       if (response?.status === "success") {
         setProducts(response?.data?.products);

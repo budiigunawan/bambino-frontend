@@ -13,6 +13,7 @@ import { IoSearch } from "react-icons/io5";
 import { Metadata, Product } from "@/lib/types";
 import { SkeletonCard } from "./skeleton-card";
 import { ProductCard } from "./product-card";
+import { useMemo } from "react";
 
 type ProductListParams = {
   products: Product[];
@@ -32,6 +33,11 @@ export const ProductList = ({
   const hanldeViewMore = () => {
     console.log("pagination");
   };
+
+  const isDisabledViewMore = useMemo(
+    () => products?.length === metadata?.totalData,
+    [metadata, products]
+  );
 
   return (
     <section className="md:my-20 my-14 p-4 md:p-0">
@@ -101,6 +107,7 @@ export const ProductList = ({
                 className="w-full my-6 border-black rounded-none uppercase font-plus"
                 variant="outline"
                 onClick={hanldeViewMore}
+                disabled={isDisabledViewMore}
               >
                 View more
               </Button>
