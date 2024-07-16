@@ -38,7 +38,7 @@ export const ProductList = ({
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <BreadcrumbLink>
+            <BreadcrumbLink className="uppercase underline">
               <Link to="/home">Home</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
