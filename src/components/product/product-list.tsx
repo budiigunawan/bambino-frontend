@@ -12,7 +12,7 @@ import { IoSearch } from "react-icons/io5";
 import { Metadata, Product } from "@/lib/types";
 import { SkeletonCard } from "./skeleton-card";
 import { ProductCard } from "./product-card";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type ProductListParams = {
   products: Product[];
@@ -29,6 +29,8 @@ export const ProductList = ({
   setLimit,
   setSearch,
 }: ProductListParams) => {
+  const [page, setPage] = useState<number>(1);
+
   const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
@@ -37,14 +39,19 @@ export const ProductList = ({
   };
 
   const hanldeViewMore = () => {
-    setLimit(20);
-    console.log("pagination");
+    setPage((page) => page + 1);
   };
 
   const isDisabledViewMore = useMemo(
     () => products?.length === metadata?.totalData,
     [metadata, products]
   );
+
+  useEffect(() => {
+    if (page > 1) {
+      setLimit(page * 10);
+    }
+  }, [page, setLimit]);
 
   return (
     <section className="md:my-20 my-14 p-4 md:p-0">
@@ -116,7 +123,7 @@ export const ProductList = ({
                 className="w-full my-6 border-black rounded-none uppercase font-plus"
                 variant="outline"
                 onClick={hanldeViewMore}
-                disabled={isDisabledViewMore}
+                disabled={isDisabledViewMore || isLoading}
               >
                 View more
               </Button>

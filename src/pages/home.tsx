@@ -14,8 +14,6 @@ export const Home = () => {
       const response = await getAllProduct({ page: 1, limit: 8 });
 
       if (response?.status === "success") {
-        console.log(response?.data, "iki data");
-
         setProducts(response?.data?.products);
       }
 
