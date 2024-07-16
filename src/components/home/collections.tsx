@@ -40,7 +40,7 @@ export const Collections = ({ products, isLoading }: CollectionsParams) => {
                 ))}
               </div>
               <Button
-                className="w-full my-6 border-black rounded-none uppercase"
+                className="w-full my-6 border-black rounded-none uppercase font-plus"
                 variant="outline"
                 onClick={hanldeViewMore}
               >

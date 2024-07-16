@@ -10,7 +10,7 @@ type ProductCardParams = {
 export const ProductCard = ({ product }: ProductCardParams) => {
   return (
     <Link
-      to={`/products/${product.id}`}
+      to={`/products/${product.slug}`}
       className="lg:col-span-3 md:col-span-4 col-span-6 "
     >
       <Card className="rounded-none border-0 shadow-none min-h-80">
