@@ -25,3 +25,17 @@ export const getAllProduct = async (query: ProductQuery) => {
     throw err;
   }
 };
+
+export const getProduct = async (id: string) => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `${baseUrl}/products/${id}`,
+    });
+
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+};

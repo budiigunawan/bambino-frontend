@@ -1,4 +1,4 @@
-import { getAllProduct } from "@/api/products-api";
+import { getAllProduct, getProduct } from "@/api/products-api";
 import { Layout } from "@/components/layout/layout";
 import { Detail } from "@/components/product/detail";
 import { Recommendation } from "@/components/product/recommendation";
@@ -7,12 +7,29 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export const ProductDetail = () => {
+  const [productDetail, setProductDetail] = useState<Product | undefined>(
+    undefined
+  );
+  const [isLoadingProductDetail, setIsLoadingProductDetail] =
+    useState<boolean>(true);
   const [productsRecommendation, setProductsRecommendation] = useState<
     Product[]
   >([]);
   const [isLoadingRecommendation, setIsLoadingRecommendation] =
     useState<boolean>(true);
   const { id } = useParams();
+
+  const fetchProductDetail = async (id: string) => {
+    setIsLoadingProductDetail(true);
+
+    const response = await getProduct(id);
+
+    if (response?.status === "success") {
+      setProductDetail(response?.data);
+    }
+
+    setIsLoadingProductDetail(false);
+  };
 
   useEffect(() => {
     async function fetchProductsRecommendation() {
@@ -30,15 +47,16 @@ export const ProductDetail = () => {
     }
 
     fetchProductsRecommendation();
+    fetchProductDetail(id!);
   }, [id]);
 
   return (
     <Layout>
-      <Detail />
+      <Detail product={productDetail!} isLoading={isLoadingProductDetail} />
       <Recommendation
         products={productsRecommendation}
         isLoading={isLoadingRecommendation}
-        page="details"
+        page="detail"
       />
     </Layout>
   );
