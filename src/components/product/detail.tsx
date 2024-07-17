@@ -78,7 +78,15 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
 
         <section className="col-span-12 lg:col-start-8 lg:col-end-13">
           {isLoading ? (
-            <p>loading...</p>
+            <>
+              <div className="space-y-1">
+                <Skeleton className="h-10" />
+                <Skeleton className="h-10" />
+              </div>
+              <Skeleton className="mt-6 h-9" />
+              <Skeleton className="mt-10 h-40" />
+              <Skeleton className="mt-10 h-20" />
+            </>
           ) : (
             <>
               <section>
@@ -130,7 +138,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                 <ul className="flex gap-2 mt-3 text-5xl">
                   <li>
                     <a
-                      href={`https://twitter.com/share?url=https://bambino.budigunawan.com/products/${product.id}`}
+                      href={`https://twitter.com/share?url=https://bambino.budigunawan.com/products/${product.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -139,7 +147,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                   </li>
                   <li>
                     <a
-                      href={`http://facebook.com/share.php?u=https://bambino.budigunawan.com/products/${product.id}`}
+                      href={`http://facebook.com/share.php?u=https://bambino.budigunawan.com/products/${product.slug}`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -153,10 +161,17 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
         </section>
 
         <section className="col-span-12 lg:col-span-6">
-          <DetailAccordion
-            overview={product?.overview}
-            materials={product?.materials}
-          />
+          {isLoading ? (
+            <div className="space-y-1">
+              <Skeleton className="h-8" />
+              <Skeleton className="h-8" />
+            </div>
+          ) : (
+            <DetailAccordion
+              overview={product?.overview}
+              materials={product?.materials}
+            />
+          )}
         </section>
       </section>
     </section>
