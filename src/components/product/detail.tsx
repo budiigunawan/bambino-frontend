@@ -12,6 +12,8 @@ import { rupiahFormat } from "@/lib/helpers";
 import { Button } from "../ui/button";
 import { FaSquareFacebook, FaSquareXTwitter } from "react-icons/fa6";
 import { DetailAccordion } from "./detail-accordion";
+import { Input } from "../ui/input";
+import { useState } from "react";
 
 type DetailParams = {
   product: Product;
@@ -19,6 +21,16 @@ type DetailParams = {
 };
 
 export const Detail = ({ product, isLoading }: DetailParams) => {
+  const [quantity, setQuantity] = useState<number>(1);
+
+  const handlePlus = () => {
+    setQuantity((quantity) => quantity + 1);
+  };
+
+  const handleMinus = () => {
+    setQuantity((quantity) => quantity - 1);
+  };
+
   return (
     <section className="md:my-20 my-14 p-4 md:p-0">
       <Breadcrumb>
@@ -68,10 +80,22 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                 </p>
               </section>
               <section className="mt-10">
-                <p className="text-lg md:text-xl font-poppins uppercase">
-                  Quantity
-                </p>
-                <div className="mt-4 bg-gray-300 h-11 w-2/5" />
+                <p className="md:text-lg font-poppins uppercase">Quantity</p>
+                <div className="mt-4 flex w-1/2 items-center space-x-2">
+                  <Button type="button" variant="outline" onClick={handleMinus}>
+                    -
+                  </Button>
+                  <Input
+                    className="text-center"
+                    type="number"
+                    min={1}
+                    value={quantity}
+                    placeholder="1"
+                  />
+                  <Button type="button" variant="outline" onClick={handlePlus}>
+                    +
+                  </Button>
+                </div>
                 <Button className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light">
                   Add to cart
                 </Button>
