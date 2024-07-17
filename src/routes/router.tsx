@@ -1,8 +1,8 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Home } from "../pages/home";
-import { ErrorPage } from "@/pages/error";
-import { Products } from "@/pages/products";
-import { ProductDetail } from "@/pages/product-detail";
+import { Home } from "./home";
+import { ErrorPage } from "@/routes/error";
+import { Products } from "@/routes/products";
+import { ProductDetail } from "@/routes/product-detail";
 
 export const router = createBrowserRouter([
   {
