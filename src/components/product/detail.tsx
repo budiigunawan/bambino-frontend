@@ -31,6 +31,16 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
     setQuantity((quantity) => quantity - 1);
   };
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setQuantity(parseInt(e.target.value));
+  };
+
+  const handleBlur = () => {
+    if (!quantity) {
+      setQuantity(1);
+    }
+  };
+
   return (
     <section className="md:my-20 my-14 p-4 md:p-0">
       <Breadcrumb>
@@ -82,17 +92,30 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
               <section className="mt-10">
                 <p className="md:text-lg font-poppins uppercase">Quantity</p>
                 <div className="mt-4 flex w-1/2 items-center space-x-2">
-                  <Button type="button" variant="outline" onClick={handleMinus}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handleMinus}
+                    disabled={quantity === 1}
+                  >
                     -
                   </Button>
                   <Input
                     className="text-center"
                     type="number"
                     min={1}
+                    max={product?.stock}
                     value={quantity}
-                    placeholder="1"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    required
                   />
-                  <Button type="button" variant="outline" onClick={handlePlus}>
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={handlePlus}
+                    disabled={quantity === product?.stock}
+                  >
                     +
                   </Button>
                 </div>
