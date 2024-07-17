@@ -72,11 +72,11 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
           <img
             src={product?.imageUrl}
             alt={product?.slug}
-            className="col-span-12 md:col-span-6"
+            className="col-span-12 lg:col-span-6"
           />
         )}
 
-        <section className="col-span-12 md:col-start-8 md:col-end-13">
+        <section className="col-span-12 lg:col-start-8 lg:col-end-13">
           {isLoading ? (
             <p>loading...</p>
           ) : (
@@ -152,7 +152,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
           )}
         </section>
 
-        <section className="col-span-12 md:col-span-6">
+        <section className="col-span-12 lg:col-span-6">
           <DetailAccordion
             overview={product?.overview}
             materials={product?.materials}
