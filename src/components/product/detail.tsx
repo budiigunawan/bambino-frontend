@@ -11,6 +11,7 @@ import { Skeleton } from "../ui/skeleton";
 import { rupiahFormat } from "@/lib/helpers";
 import { Button } from "../ui/button";
 import { FaSquareFacebook, FaSquareXTwitter } from "react-icons/fa6";
+import { DetailAccordion } from "./detail-accordion";
 
 type DetailParams = {
   product: Product;
@@ -71,7 +72,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                   Quantity
                 </p>
                 <div className="mt-4 bg-gray-300 h-11 w-2/5" />
-                <Button className="mt-8 rounded-none h-12 w-full uppercase">
+                <Button className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light">
                   Add to cart
                 </Button>
               </section>
@@ -104,7 +105,12 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
           )}
         </section>
 
-        <section className="h-[188px] md:h-[453px] bg-gray-500 col-span-12 md:col-span-6" />
+        <section className="col-span-12 md:col-span-6">
+          <DetailAccordion
+            overview={product?.overview}
+            materials={product?.materials}
+          />
+        </section>
       </section>
     </section>
   );

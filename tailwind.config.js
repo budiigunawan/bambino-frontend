@@ -20,7 +20,7 @@ module.exports = {
     extend: {
       colors: {
         "b-blue": "#6667AA",
-        "b-pink": "#FFACB7",
+        "b-pink": { light: "#FF96A4", dark: "#FE8191" },
         "b-gray": { light: "#D9D9D9", dark: "#7D7D7D" },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
