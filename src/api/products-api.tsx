@@ -26,11 +26,11 @@ export const getAllProduct = async (query: ProductQuery) => {
   }
 };
 
-export const getProduct = async (id: string) => {
+export const getProduct = async (slug: string) => {
   try {
     const response = await axios({
       method: "GET",
-      url: `${baseUrl}/products/${id}`,
+      url: `${baseUrl}/products/${slug}`,
     });
 
     return response.data;

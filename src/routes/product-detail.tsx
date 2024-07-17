@@ -17,12 +17,12 @@ export const ProductDetail = () => {
   >([]);
   const [isLoadingRecommendation, setIsLoadingRecommendation] =
     useState<boolean>(true);
-  const { id } = useParams();
+  const { slug } = useParams();
 
-  const fetchProductDetail = async (id: string) => {
+  const fetchProductDetail = async (slug: string) => {
     setIsLoadingProductDetail(true);
 
-    const response = await getProduct(id);
+    const response = await getProduct(slug);
 
     if (response?.status === "success") {
       setProductDetail(response?.data);
@@ -38,7 +38,7 @@ export const ProductDetail = () => {
       if (response?.status === "success") {
         const responseProducts = response?.data?.products;
         const filteredProducts = responseProducts
-          .filter((product: Product) => product.id !== id)
+          .filter((product: Product) => product.slug !== slug)
           .slice(0, 4);
         setProductsRecommendation(filteredProducts);
       }
@@ -47,8 +47,8 @@ export const ProductDetail = () => {
     }
 
     fetchProductsRecommendation();
-    fetchProductDetail(id!);
-  }, [id]);
+    fetchProductDetail(slug!);
+  }, [slug]);
 
   return (
     <Layout>
