@@ -15,7 +15,7 @@ export const Recommendation = ({
 }: RecommendationParams) => {
   return (
     <section className="p-4 md:p-0 mb-20">
-      <h2 className="font-bold font-poppins text-4xl text-b-black text-center uppercase">
+      <h2 className="font-bold font-poppins text-2xl md:text-4xl text-b-black text-center uppercase">
         {page === "details" ? "People also viewed" : "People also bought"}
       </h2>
       {isLoading ? (

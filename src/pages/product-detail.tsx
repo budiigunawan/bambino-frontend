@@ -7,12 +7,15 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export const ProductDetail = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [productsRecommendation, setProductsRecommendation] = useState<
+    Product[]
+  >([]);
+  const [isLoadingRecommendation, setIsLoadingRecommendation] =
+    useState<boolean>(true);
   const { id } = useParams();
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchProductsRecommendation() {
       const response = await getAllProduct({ page: 1, limit: 5 });
 
       if (response?.status === "success") {
@@ -20,21 +23,21 @@ export const ProductDetail = () => {
         const filteredProducts = responseProducts
           .filter((product: Product) => product.id !== id)
           .slice(0, 4);
-        setProducts(filteredProducts);
+        setProductsRecommendation(filteredProducts);
       }
 
-      setIsLoading(false);
+      setIsLoadingRecommendation(false);
     }
 
-    fetchData();
+    fetchProductsRecommendation();
   }, [id]);
 
   return (
     <Layout>
       <Detail />
       <Recommendation
-        products={products}
-        isLoading={isLoading}
+        products={productsRecommendation}
+        isLoading={isLoadingRecommendation}
         page="details"
       />
     </Layout>
