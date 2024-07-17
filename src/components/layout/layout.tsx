@@ -1,6 +1,7 @@
 import React from "react";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
+import { ScrollRestoration } from "react-router-dom";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ export const Layout = ({ children }: LayoutProps) => {
         <div className="lg:min-h-[824px] min-h-[700px]">{children}</div>
       </div>
       <Footer />
+      <ScrollRestoration />
     </>
   );
 };
