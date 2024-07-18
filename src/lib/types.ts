@@ -18,3 +18,13 @@ export type Metadata = {
   totalData: number;
   totalPage: number;
 };
+
+export type ProductListResponseType = {
+  code: number;
+  status: string;
+  data: {
+    totalData: number;
+    totalPage: number;
+    products: Product[];
+  };
+};

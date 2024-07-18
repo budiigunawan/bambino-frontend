@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -12,46 +12,29 @@ import { IoSearch } from "react-icons/io5";
 import { Metadata, Product } from "@/lib/types";
 import { SkeletonCard } from "./skeleton-card";
 import { ProductCard } from "./product-card";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 type ProductListParams = {
   products: Product[];
   metadata: Metadata;
   isLoading: boolean;
-  setLimit: (value: number) => void;
-  setSearch: (value: string) => void;
 };
 
 export const ProductList = ({
   products,
   metadata,
   isLoading,
-  setLimit,
-  setSearch,
 }: ProductListParams) => {
-  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState(10);
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>): void => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const search = formData.get("search") as string;
-    setSearch(search);
+  const handleViewMore = () => {
+    setLimit((limit) => limit + 10);
   };
 
-  const hanldeViewMore = () => {
-    setPage((page) => page + 1);
-  };
-
-  const isDisabledViewMore = useMemo(
-    () => products?.length === metadata?.totalData,
-    [metadata, products]
+  const isDisableViewMore = useMemo(
+    () => products.length === metadata.totalData,
+    [products, metadata]
   );
-
-  useEffect(() => {
-    if (page > 1) {
-      setLimit(page * 10);
-    }
-  }, [page, setLimit]);
 
   return (
     <section className="md:my-20 my-14 p-4 md:p-0">
@@ -82,14 +65,14 @@ export const ProductList = ({
             !metadata.totalData ? "item" : "items"
           }`}
         </p>
-        <form
-          onSubmit={handleSearch}
-          method="post"
+        <Form
+          method="get"
+          action="/products"
           className="flex w-full max-w-sm items-center space-x-1"
         >
           <Input
             type="text"
-            name="search"
+            name="q"
             placeholder="Search by collection name"
             className="font-plus focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
             disabled={isLoading}
@@ -97,7 +80,7 @@ export const ProductList = ({
           <Button type="submit" variant="outline">
             <IoSearch />
           </Button>
-        </form>
+        </Form>
       </div>
 
       {/* Product list */}
@@ -119,14 +102,23 @@ export const ProductList = ({
                   <ProductCard key={index} product={product} />
                 ))}
               </div>
-              <Button
-                className="w-full my-6 border-black rounded-none uppercase font-plus"
-                variant="outline"
-                onClick={hanldeViewMore}
-                disabled={isDisabledViewMore || isLoading}
-              >
-                View more
-              </Button>
+              <Form method="get" action="/products">
+                <input
+                  name="limit"
+                  type="number"
+                  className="hidden"
+                  defaultValue={limit}
+                />
+                <Button
+                  className="w-full my-6 border-black rounded-none uppercase font-plus"
+                  variant="outline"
+                  type="submit"
+                  onClick={handleViewMore}
+                  disabled={isDisableViewMore}
+                >
+                  View more
+                </Button>
+              </Form>
             </>
           )}
         </div>

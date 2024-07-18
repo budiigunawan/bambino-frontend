@@ -9,6 +9,7 @@ export const router = createBrowserRouter([
   {
     path: "/products",
     element: <Products />,
+    loader: Products.loader,
   },
   {
     path: "/products/:slug",
