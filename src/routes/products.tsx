@@ -1,14 +1,9 @@
 import { getAllProduct } from "@/api/products-api";
 import { Layout } from "@/components/layout/layout";
 import { ProductList } from "@/components/product/product-list";
-import { Metadata, Product } from "@/lib/types";
+import { ProductListData } from "@/lib/types";
 import { useMemo } from "react";
 import { Navigation, useLoaderData, useNavigation } from "react-router-dom";
-
-type ProductListData = {
-  products: Product[];
-  metadata: Metadata;
-};
 
 async function loader({
   request,

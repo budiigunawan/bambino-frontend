@@ -28,3 +28,8 @@ export type ProductListResponseType = {
     products: Product[];
   };
 };
+
+export type ProductListData = {
+  products: Product[];
+  metadata: Metadata;
+};

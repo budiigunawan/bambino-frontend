@@ -2,31 +2,48 @@ import { getAllProduct } from "@/api/products-api";
 import { Collections } from "@/components/home/collections";
 import { Hero } from "@/components/home/hero";
 import { Layout } from "@/components/layout/layout";
-import { Product } from "@/lib/types";
-import { useEffect, useState } from "react";
+import { ProductListData } from "@/lib/types";
+import { useMemo } from "react";
+import { Navigation, useLoaderData, useNavigation } from "react-router-dom";
+
+async function loader({
+  request,
+}: {
+  request: Request;
+}): Promise<ProductListData> {
+  const url = new URL(request.url);
+  const page = url.searchParams.get("page");
+  const limit = url.searchParams.get("limit");
+  const q = url.searchParams.get("q");
+
+  const payload = {
+    page: !page ? 1 : parseInt(page),
+    limit: !limit ? 10 : parseInt(limit),
+    q: q ?? "",
+  };
+  const response = await getAllProduct(payload);
+
+  return {
+    products: response?.data?.products,
+    metadata: {
+      totalData: response?.data?.totalData,
+      totalPage: response?.data?.totalPage,
+    },
+  };
+}
 
 export const Home = () => {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const productListData = useLoaderData() as ProductListData;
+  const navigation: Navigation = useNavigation();
 
-  useEffect(() => {
-    async function fetchData() {
-      const response = await getAllProduct({ page: 1, limit: 8 });
-
-      if (response?.status === "success") {
-        setProducts(response?.data?.products);
-      }
-
-      setIsLoading(false);
-    }
-
-    fetchData();
-  }, []);
+  const isLoading = useMemo(() => navigation.state === "loading", [navigation]);
 
   return (
     <Layout>
       <Hero />
-      <Collections products={products} isLoading={isLoading} />
+      <Collections products={productListData?.products} isLoading={isLoading} />
     </Layout>
   );
 };
+
+Home.loader = loader;
