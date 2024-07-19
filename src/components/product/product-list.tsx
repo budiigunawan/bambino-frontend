@@ -1,4 +1,4 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useSearchParams } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -26,6 +26,8 @@ export const ProductList = ({
   isLoading,
 }: ProductListParams) => {
   const [limit, setLimit] = useState(10);
+  const [searchParams] = useSearchParams();
+  const querySearch = searchParams.get("q");
 
   const handleViewMore = () => {
     setLimit((limit) => limit + 10);
@@ -76,6 +78,7 @@ export const ProductList = ({
             placeholder="Search by collection name"
             className="font-plus focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
             disabled={isLoading}
+            defaultValue={querySearch ?? undefined}
           />
           <Button type="submit" variant="outline">
             <IoSearch />
