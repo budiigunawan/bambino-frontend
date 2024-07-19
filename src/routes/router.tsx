@@ -5,16 +5,19 @@ export const router = createBrowserRouter([
   {
     path: "/home",
     element: <Home />,
+    errorElement: <ErrorPage />,
     loader: Home.loader,
   },
   {
     path: "/products",
     element: <Products />,
+    errorElement: <ErrorPage />,
     loader: Products.loader,
   },
   {
     path: "/products/:slug",
     element: <ProductDetail />,
+    errorElement: <ErrorPage />,
     loader: ProductDetail.loader,
   },
   {
