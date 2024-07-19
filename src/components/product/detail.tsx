@@ -69,7 +69,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
 
       <section className="my-10 grid gap-x-4 gap-y-6 grid-cols-12">
         {isLoading ? (
-          <Skeleton className="h-[188px] xl:h-[556px] lg:h-[440px] md:h-[328px] col-span-12 md:col-span-6" />
+          <Skeleton className="h-[188px] xl:h-[556px] lg:h-[440px] md:h-[328px] col-span-12 lg:col-span-6" />
         ) : (
           <img
             src={product?.imageUrl}
@@ -100,7 +100,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                 </p>
               </section>
               <section className="mt-10">
-                <Form id="cart-quantity">
+                <Form id="cart-quantity" method="post">
                   <p className="md:text-lg font-poppins uppercase">Quantity</p>
                   <div className="mt-4 flex w-1/2 items-center space-x-2">
                     <Button
@@ -112,6 +112,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                       -
                     </Button>
                     <Input
+                      id="quantity"
                       name="quantity"
                       className="text-center"
                       type="number"
@@ -134,7 +135,6 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                   <Button
                     type="submit"
                     className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light"
-                    onClick={(e) => e.preventDefault()}
                   >
                     Add to cart
                   </Button>

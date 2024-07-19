@@ -7,6 +7,7 @@ import { useMemo } from "react";
 import {
   Navigation,
   Params,
+  redirect,
   useLoaderData,
   useNavigation,
 } from "react-router-dom";
@@ -35,6 +36,19 @@ async function loader({ params }: { params: Params }) {
   }
 }
 
+async function action({ request }: { request: Request }) {
+  const formData = await request.formData();
+  const data = Object.fromEntries(formData);
+  const { quantity } = data;
+
+  if (quantity) {
+    console.log(quantity, "fd");
+    return redirect("/cart");
+  }
+
+  return null;
+}
+
 export const ProductDetail = () => {
   const { productDetail, productsRecommendation } =
     useLoaderData() as ProductDetailPageData;
@@ -54,3 +68,4 @@ export const ProductDetail = () => {
 };
 
 ProductDetail.loader = loader;
+ProductDetail.action = action;

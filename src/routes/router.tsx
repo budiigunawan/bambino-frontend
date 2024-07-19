@@ -1,5 +1,5 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { Home, Products, ProductDetail, ErrorPage } from "./index";
+import { Home, Products, ProductDetail, Cart, ErrorPage } from "./index";
 
 export const router = createBrowserRouter([
   {
@@ -22,8 +22,14 @@ export const router = createBrowserRouter([
         index: false,
         path: ":slug",
         loader: ProductDetail.loader,
+        action: ProductDetail.action,
       },
     ],
+  },
+  {
+    element: <Cart />,
+    path: "cart",
+    errorElement: <ErrorPage />,
   },
   {
     element: <ErrorPage />,
