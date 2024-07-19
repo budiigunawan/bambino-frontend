@@ -1,9 +1,8 @@
-import { Layout } from "@/components/layout/layout";
 import { Link } from "react-router-dom";
 
 export const ErrorPage = () => {
   return (
-    <Layout>
+    <>
       <section className="md:my-20 my-14">
         <h2 className="font-bold font-poppins text-4xl text-b-black uppercase">
           Page not found
@@ -24,6 +23,6 @@ export const ErrorPage = () => {
           </Link>
         </div>
       </section>
-    </Layout>
+    </>
   );
 };

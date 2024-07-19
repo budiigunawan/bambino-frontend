@@ -1,5 +1,4 @@
 import { getAllProduct } from "@/api/products-api";
-import { Layout } from "@/components/layout/layout";
 import { ProductList } from "@/components/product/product-list";
 import { ProductListData } from "@/lib/types";
 import { useMemo } from "react";
@@ -38,13 +37,13 @@ export const Products = () => {
   const isLoading = useMemo(() => navigation.state === "loading", [navigation]);
 
   return (
-    <Layout>
+    <>
       <ProductList
         products={productsListData.products}
         metadata={productsListData.metadata}
         isLoading={isLoading}
       />
-    </Layout>
+    </>
   );
 };
 

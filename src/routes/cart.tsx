@@ -1,12 +1,11 @@
 import { CartBreadcrumb } from "@/components/cart/cart-breadcrumb";
 import { OrderSummary } from "@/components/cart/order-summary";
 import { ShoppingCart } from "@/components/cart/shopping-cart";
-import { Layout } from "@/components/layout/layout";
 import { Recommendation } from "@/components/product/recommendation";
 
 export const Cart = () => {
   return (
-    <Layout>
+    <>
       <section className="my-14 p-4 md:my-20 md:p-0">
         <CartBreadcrumb />
         <section className="my-10 grid gap-x-4 gap-y-6 grid-cols-12">
@@ -15,6 +14,6 @@ export const Cart = () => {
         </section>
       </section>
       <Recommendation products={[]} isLoading={true} page="cart" />
-    </Layout>
+    </>
   );
 };

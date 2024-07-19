@@ -1,7 +1,6 @@
 import { getAllProduct } from "@/api/products-api";
 import { Collections } from "@/components/home/collections";
 import { Hero } from "@/components/home/hero";
-import { Layout } from "@/components/layout/layout";
 import { ProductListData } from "@/lib/types";
 import { useMemo } from "react";
 import { Navigation, useLoaderData, useNavigation } from "react-router-dom";
@@ -39,10 +38,10 @@ export const Home = () => {
   const isLoading = useMemo(() => navigation.state === "loading", [navigation]);
 
   return (
-    <Layout>
+    <>
       <Hero />
       <Collections products={productListData?.products} isLoading={isLoading} />
-    </Layout>
+    </>
   );
 };
 

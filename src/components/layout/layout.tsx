@@ -1,18 +1,23 @@
-import React from "react";
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
-import { ScrollRestoration } from "react-router-dom";
+import { Outlet, ScrollRestoration } from "react-router-dom";
+import { useEffect } from "react";
+import { usePageStore } from "@/stores/store";
 
-type LayoutProps = {
-  children: React.ReactNode;
-};
+export const Layout = () => {
+  const { togglePageLoaded } = usePageStore();
 
-export const Layout = ({ children }: LayoutProps) => {
+  useEffect(() => {
+    togglePageLoaded();
+  }, [togglePageLoaded]);
+
   return (
     <>
       <Navbar />
       <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto">
-        <div className="lg:min-h-[824px] min-h-[700px]">{children}</div>
+        <div className="lg:min-h-[824px] min-h-[700px]">
+          <Outlet />
+        </div>
       </div>
       <Footer />
       <ScrollRestoration />
