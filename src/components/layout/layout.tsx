@@ -1,26 +1,21 @@
 import { Navbar } from "./navbar";
 import { Footer } from "./footer";
-import { Outlet, ScrollRestoration } from "react-router-dom";
-import { useEffect } from "react";
-import { usePageStore } from "@/stores/page";
+import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 import { LoadingLayout } from "./loading-layout";
 
 export const Layout = () => {
-  const { pageLoaded } = usePageStore();
-  const { togglePageLoaded } = usePageStore();
+  const { state } = useNavigation();
 
-  useEffect(() => {
-    togglePageLoaded();
-  }, [togglePageLoaded]);
+  if (state === "loading") {
+    return <LoadingLayout />;
+  }
 
   return (
     <>
       <Navbar />
-      <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto">
-        <div className="lg:min-h-[824px] min-h-[700px]">
-          {pageLoaded ? <Outlet /> : <LoadingLayout />}
-        </div>
-      </div>
+      <main className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto lg:min-h-[824px] min-h-[700px]">
+        <Outlet />
+      </main>
       <Footer />
       <ScrollRestoration />
     </>
