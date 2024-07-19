@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { usePageStore } from "@/stores/store";
 
 export const Layout = () => {
+  const { pageLoaded } = usePageStore();
   const { togglePageLoaded } = usePageStore();
 
   useEffect(() => {
@@ -16,7 +17,7 @@ export const Layout = () => {
       <Navbar />
       <div className="xl:max-w-6xl lg:max-w-4xl md:max-w-2xl mx-auto">
         <div className="lg:min-h-[824px] min-h-[700px]">
-          <Outlet />
+          {pageLoaded ? <Outlet /> : <p>Loading...</p>}
         </div>
       </div>
       <Footer />
