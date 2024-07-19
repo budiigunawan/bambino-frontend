@@ -68,6 +68,7 @@ export const ProductList = ({
           }`}
         </p>
         <Form
+          id="search-product"
           method="get"
           action="/products"
           className="flex w-full max-w-sm items-center space-x-1"
@@ -105,7 +106,7 @@ export const ProductList = ({
                   <ProductCard key={index} product={product} />
                 ))}
               </div>
-              <Form method="get" action="/products">
+              <Form id="pagination-products" method="get" action="/products">
                 <input
                   name="limit"
                   type="number"
