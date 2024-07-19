@@ -2,62 +2,55 @@ import { getAllProduct, getProduct } from "@/api/products-api";
 import { Layout } from "@/components/layout/layout";
 import { Detail } from "@/components/product/detail";
 import { Recommendation } from "@/components/product/recommendation";
-import { Product } from "@/lib/types";
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Product, ProductDetailPageData } from "@/lib/types";
+import { useMemo } from "react";
+import {
+  Navigation,
+  Params,
+  useLoaderData,
+  useNavigation,
+} from "react-router-dom";
+
+async function loader({ params }: { params: Params }) {
+  try {
+    const slug = params.slug;
+
+    const [productDetailResponse, productListResponse] = await Promise.all([
+      getProduct(slug!),
+      getAllProduct({ page: 1, limit: 5 }),
+    ]);
+
+    const responseProducts = productListResponse.data.products;
+    const filteredProducts = responseProducts
+      .filter((product: Product) => product.slug !== slug)
+      .slice(0, 4);
+
+    return {
+      productDetail: productDetailResponse.data,
+      productsRecommendation: filteredProducts,
+    };
+  } catch (err) {
+    console.error(err);
+    throw err;
+  }
+}
 
 export const ProductDetail = () => {
-  const [productDetail, setProductDetail] = useState<Product | undefined>(
-    undefined
-  );
-  const [isLoadingProductDetail, setIsLoadingProductDetail] =
-    useState<boolean>(true);
-  const [productsRecommendation, setProductsRecommendation] = useState<
-    Product[]
-  >([]);
-  const [isLoadingRecommendation, setIsLoadingRecommendation] =
-    useState<boolean>(true);
-  const { slug } = useParams();
-
-  const fetchProductDetail = async (slug: string) => {
-    setIsLoadingProductDetail(true);
-
-    const response = await getProduct(slug);
-
-    if (response?.status === "success") {
-      setProductDetail(response?.data);
-    }
-
-    setIsLoadingProductDetail(false);
-  };
-
-  useEffect(() => {
-    async function fetchProductsRecommendation() {
-      const response = await getAllProduct({ page: 1, limit: 5 });
-
-      if (response?.status === "success") {
-        const responseProducts = response?.data?.products;
-        const filteredProducts = responseProducts
-          .filter((product: Product) => product.slug !== slug)
-          .slice(0, 4);
-        setProductsRecommendation(filteredProducts);
-      }
-
-      setIsLoadingRecommendation(false);
-    }
-
-    fetchProductsRecommendation();
-    fetchProductDetail(slug!);
-  }, [slug]);
+  const { productDetail, productsRecommendation } =
+    useLoaderData() as ProductDetailPageData;
+  const navigation: Navigation = useNavigation();
+  const isLoading = useMemo(() => navigation.state === "loading", [navigation]);
 
   return (
     <Layout>
-      <Detail product={productDetail!} isLoading={isLoadingProductDetail} />
+      <Detail product={productDetail!} isLoading={isLoading} />
       <Recommendation
         products={productsRecommendation}
-        isLoading={isLoadingRecommendation}
+        isLoading={isLoading}
         page="detail"
       />
     </Layout>
   );
 };
+
+ProductDetail.loader = loader;

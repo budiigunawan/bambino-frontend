@@ -1,5 +1,5 @@
 import { sanitizeQuery } from "@/lib/helpers";
-import { ProductListResponseType } from "@/lib/types";
+import { ProductListResponseType, ProductResponseType } from "@/lib/types";
 import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_APP_API_BASEURL;
@@ -34,7 +34,7 @@ export const getProduct = async (slug: string) => {
       url: `${baseUrl}/products/${slug}`,
     });
 
-    return response.data;
+    return response.data as ProductResponseType;
   } catch (err) {
     console.error(err);
     throw err;

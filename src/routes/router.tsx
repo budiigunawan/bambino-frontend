@@ -15,6 +15,7 @@ export const router = createBrowserRouter([
   {
     path: "/products/:slug",
     element: <ProductDetail />,
+    loader: ProductDetail.loader,
   },
   {
     path: "/error",

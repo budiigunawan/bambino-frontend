@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -38,6 +38,8 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
   const handleBlur = () => {
     if (!quantity) {
       setQuantity(1);
+    } else if (quantity > product.stock) {
+      setQuantity(product.stock);
     }
   };
 
@@ -98,38 +100,45 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                 </p>
               </section>
               <section className="mt-10">
-                <p className="md:text-lg font-poppins uppercase">Quantity</p>
-                <div className="mt-4 flex w-1/2 items-center space-x-2">
+                <Form id="cart-quantity">
+                  <p className="md:text-lg font-poppins uppercase">Quantity</p>
+                  <div className="mt-4 flex w-1/2 items-center space-x-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handleMinus}
+                      disabled={quantity === 1}
+                    >
+                      -
+                    </Button>
+                    <Input
+                      name="quantity"
+                      className="text-center"
+                      type="number"
+                      min={1}
+                      max={product?.stock}
+                      value={quantity}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      required
+                    />
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={handlePlus}
+                      disabled={quantity === product?.stock}
+                    >
+                      +
+                    </Button>
+                  </div>
                   <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handleMinus}
-                    disabled={quantity === 1}
+                    type="submit"
+                    className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light"
+                    onClick={(e) => e.preventDefault()}
                   >
-                    -
+                    Add to cart
                   </Button>
-                  <Input
-                    className="text-center"
-                    type="number"
-                    min={1}
-                    max={product?.stock}
-                    value={quantity}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    required
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    onClick={handlePlus}
-                    disabled={quantity === product?.stock}
-                  >
-                    +
-                  </Button>
-                </div>
-                <Button className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light">
-                  Add to cart
-                </Button>
+                </Form>
               </section>
               <section className="mt-10">
                 <p className="text-lg md:text-xl font-poppins uppercase">

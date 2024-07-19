@@ -33,3 +33,14 @@ export type ProductListData = {
   products: Product[];
   metadata: Metadata;
 };
+
+export type ProductResponseType = {
+  code: number;
+  status: string;
+  data: Product;
+};
+
+export type ProductDetailPageData = {
+  productDetail: Product;
+  productsRecommendation: Product[];
+};
