@@ -3,6 +3,7 @@ import { Home, Products, ProductDetail, Cart, ErrorPage } from "./index";
 import { Layout } from "@/components/layout/layout";
 import { Login } from "./login";
 import { Register } from "./register";
+import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export const router = createBrowserRouter([
   {
@@ -34,7 +35,11 @@ export const router = createBrowserRouter([
         ],
       },
       {
-        element: <Cart />,
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        ),
         path: "cart",
         errorElement: <ErrorPage />,
       },
