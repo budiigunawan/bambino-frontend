@@ -32,7 +32,7 @@ export const LoginForm = () => {
   };
 
   return (
-    <section className="my-14 p-4 grid grid-cols-12 gap-x-4 md:my-20 md:p-0">
+    <section className="my-20 p-4 grid grid-cols-12 gap-x-4 md:my-28 md:p-0">
       <section className="col-span-12 border border-b-gray-light p-5 md:col-span-6">
         <h2 className="font-bold font-poppins text-4xl text-b-black uppercase">
           Login
