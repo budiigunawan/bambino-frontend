@@ -1,6 +1,7 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { Home, Products, ProductDetail, Cart, ErrorPage } from "./index";
 import { Layout } from "@/components/layout/layout";
+import { Login } from "./login";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
       {
         element: <Cart />,
         path: "cart",
+        errorElement: <ErrorPage />,
+      },
+      {
+        element: <Login />,
+        path: "login",
         errorElement: <ErrorPage />,
       },
       {
