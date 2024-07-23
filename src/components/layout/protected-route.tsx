@@ -6,7 +6,7 @@ type ProtectedRouteParams = {
 };
 
 export const ProtectedRoute = ({ children }: ProtectedRouteParams) => {
-  // TODO: CHANGE WITH  DYNAMIC VALUE
+  // TODO: CHANGE TO DYNAMIC VALUE
   const isAuthenticated = false;
 
   if (!isAuthenticated) {
