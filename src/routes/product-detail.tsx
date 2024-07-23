@@ -36,16 +36,16 @@ async function loader({ params }: { params: Params }) {
 }
 
 async function action({ request }: { request: Request }) {
+  const cartId = localStorage.getItem("cartId");
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
   const { quantity } = data;
 
-  if (quantity) {
-    console.log(quantity, "fd");
+  if (cartId && quantity) {
     return redirect("/cart");
+  } else {
+    return redirect("/login");
   }
-
-  return null;
 }
 
 export const ProductDetail = () => {
