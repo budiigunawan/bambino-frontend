@@ -43,7 +43,7 @@ export const RegisterForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="password"
+              name="fullName"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="md:text-lg font-poppins uppercase">
