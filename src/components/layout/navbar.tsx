@@ -12,7 +12,6 @@ import { useUserStore } from "@/stores";
 
 export const Navbar = () => {
   const user = useUserStore((state) => state.user);
-  const cartId = localStorage.getItem("cartId");
 
   return (
     <div className="border-b border-b-gray-light fixed top-0 w-full z-10 bg-white">
@@ -47,7 +46,7 @@ export const Navbar = () => {
               )}
             </MenubarMenu>
             <MenubarMenu>
-              <Link to={cartId ? "/cart" : "/login"}>
+              <Link to="/cart">
                 <IoCartOutline fontSize={"24px"} />
               </Link>
             </MenubarMenu>
