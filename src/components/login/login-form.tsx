@@ -12,6 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 export const LoginForm = () => {
   const formSchema = z.object({
@@ -78,8 +79,13 @@ export const LoginForm = () => {
               <Button type="submit" className="uppercase">
                 Login
               </Button>
-              <Button type="button" variant="outline" className="uppercase">
-                Create an account
+              <Button
+                type="button"
+                variant="outline"
+                className="uppercase"
+                asChild
+              >
+                <Link to="/register">Create an account</Link>
               </Button>
             </div>
           </form>
