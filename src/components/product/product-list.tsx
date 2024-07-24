@@ -1,4 +1,4 @@
-import { Form, Link } from "react-router-dom";
+import { Form, Link, useSearchParams } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -24,6 +24,8 @@ export const ProductList = ({
   isLoading,
 }: ProductListParams) => {
   const [limit, setLimit] = useState(10);
+  const [searchParams] = useSearchParams();
+  const querySearch = searchParams.get("q");
 
   const handleViewMore = () => {
     setLimit((limit) => limit + 10);
@@ -59,9 +61,9 @@ export const ProductList = ({
       {/* Search product */}
       <div className="mt-8 flex justify-between items-center space-x-4">
         <p className="font-poppins font-semibold text-lg uppercase">
-          {`Results: ${metadata.totalData} ${
-            !metadata.totalData ? "item" : "items"
-          }`}
+          {`Results${querySearch ? " for " + querySearch : ""}: ${
+            metadata.totalData
+          } ${!metadata.totalData ? "item" : "items"}`}
         </p>
       </div>
 
