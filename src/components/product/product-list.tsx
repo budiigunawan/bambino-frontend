@@ -1,4 +1,4 @@
-import { Form, Link, useSearchParams } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -6,9 +6,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../ui/breadcrumb";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { IoSearch } from "react-icons/io5";
 import { Metadata, Product } from "@/lib/types";
 import { SkeletonCard } from "./skeleton-card";
 import { ProductCard } from "./product-card";
@@ -26,8 +24,6 @@ export const ProductList = ({
   isLoading,
 }: ProductListParams) => {
   const [limit, setLimit] = useState(10);
-  const [searchParams] = useSearchParams();
-  const querySearch = searchParams.get("q");
 
   const handleViewMore = () => {
     setLimit((limit) => limit + 10);
@@ -67,24 +63,6 @@ export const ProductList = ({
             !metadata.totalData ? "item" : "items"
           }`}
         </p>
-        <Form
-          id="search-product"
-          method="get"
-          action="/products"
-          className="flex w-full max-w-sm items-center space-x-1"
-        >
-          <Input
-            type="text"
-            name="q"
-            placeholder="Search by collection name"
-            className="font-plus focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
-            disabled={isLoading}
-            defaultValue={querySearch ?? undefined}
-          />
-          <Button type="submit" variant="outline">
-            <IoSearch />
-          </Button>
-        </Form>
       </div>
 
       {/* Product list */}
