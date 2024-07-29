@@ -7,7 +7,7 @@ type ProtectedRouteParams = {
 
 export const ProtectedRoute = ({ children }: ProtectedRouteParams) => {
   // TODO: CHANGE TO DYNAMIC VALUE
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   if (!isAuthenticated) {
     return <Navigate to="/login" />;
