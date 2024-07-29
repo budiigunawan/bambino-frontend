@@ -44,6 +44,14 @@ export const OrderSummary = ({ dataCart }: OrderSummaryParams) => {
     return counter;
   }, [dataCart]);
 
+  const orderTotal = useMemo(() => {
+    const totalPrice = dataCart.products.reduce((sum, item) => {
+      return sum + item.quantity * +item.product.price;
+    }, 0);
+
+    return totalPrice;
+  }, [dataCart]);
+
   return (
     <section className="col-span-12 lg:col-start-8 lg:col-end-13">
       <section className="border border-b-gray-light p-4">
@@ -52,11 +60,11 @@ export const OrderSummary = ({ dataCart }: OrderSummaryParams) => {
         </h3>
         <div className="flex justify-between mb-5">
           <p>{"Item(s) subtotal"}</p>
-          <p>{rupiahFormat(248000)}</p>
+          <p>{rupiahFormat(orderTotal)}</p>
         </div>
         <div className="flex justify-between">
-          <p className="uppercase font-plus font-bold">Subtotal</p>
-          <p>{rupiahFormat(248000)}</p>
+          <p className="uppercase font-plus font-bold">Order total</p>
+          <p>{rupiahFormat(orderTotal)}</p>
         </div>
       </section>
       <section>

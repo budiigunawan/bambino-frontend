@@ -1,7 +1,7 @@
 import { CartBreadcrumb } from "@/components/cart/cart-breadcrumb";
 import { OrderSummary } from "@/components/cart/order-summary";
 import { ShoppingCart } from "@/components/cart/shopping-cart";
-import { Recommendation } from "@/components/product/recommendation";
+// import { Recommendation } from "@/components/product/recommendation";
 
 export const Cart = () => {
   const dataCart = {
@@ -38,15 +38,19 @@ export const Cart = () => {
   };
 
   return (
-    <>
-      <section className="my-14 p-4 md:my-20 md:p-0">
-        <CartBreadcrumb />
-        <section className="my-10 grid gap-x-4 gap-y-6 grid-cols-12">
-          <ShoppingCart />
-          <OrderSummary dataCart={dataCart} />
-        </section>
+    <section className="my-14 p-4 md:my-20 md:p-0">
+      <CartBreadcrumb />
+
+      <h2 className="mt-10 font-bold font-poppins text-4xl text-b-black uppercase">
+        Shopping cart
+      </h2>
+
+      <section className="my-10 grid gap-x-4 gap-y-6 grid-cols-12">
+        <ShoppingCart cartItems={dataCart.products} />
+        <OrderSummary dataCart={dataCart} />
       </section>
-      <Recommendation products={[]} isLoading={true} page="cart" />
-    </>
+
+      {/* <Recommendation products={[]} isLoading={true} page="cart" /> */}
+    </section>
   );
 };
