@@ -17,7 +17,7 @@ async function loader({
 
   const payload = {
     page: !page ? 1 : parseInt(page),
-    limit: !limit ? 10 : parseInt(limit),
+    limit: !limit ? 8 : parseInt(limit),
     q: q ?? "",
   };
   const response = await getAllProduct(payload);
