@@ -44,3 +44,27 @@ export type ProductDetailPageData = {
   productDetail: Product;
   productsRecommendation: Product[];
 };
+
+export type UserDataRegister = {
+  username?: string;
+  email?: string;
+  password?: string;
+};
+
+export type User = {
+  id: string;
+  email: string;
+  username: string;
+  fullName: string | null;
+  address: string | null;
+  phone: string | null;
+  passwordId: string | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type RegisterResponse = {
+  code: number;
+  status: string;
+  newUser: User;
+};

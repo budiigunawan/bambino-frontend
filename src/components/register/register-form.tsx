@@ -12,10 +12,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useSubmit } from "react-router-dom";
 
 export const RegisterForm = () => {
+  const submit = useSubmit();
+
   const formSchema = z.object({
-    fullName: z.string().min(8),
+    username: z.string().min(8),
     email: z.string().email(),
     password: z.string().min(8),
   });
@@ -23,14 +26,16 @@ export const RegisterForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fullName: "",
+      username: "",
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (userData: z.infer<typeof formSchema>) => {
+    submit(userData, {
+      method: "post",
+    });
   };
 
   return (
@@ -43,14 +48,14 @@ export const RegisterForm = () => {
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
-              name="fullName"
+              name="username"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="md:text-lg font-poppins uppercase">
-                    Full name *
+                    Username *
                   </FormLabel>
                   <FormControl>
-                    <Input placeholder="Jane Doe" {...field} />
+                    <Input placeholder="jane.doe" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

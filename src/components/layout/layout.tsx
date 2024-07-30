@@ -2,6 +2,7 @@ import { Navbar } from "./navbar";
 import { Footer } from "./footer";
 import { Outlet, ScrollRestoration, useNavigation } from "react-router-dom";
 import { LoadingLayout } from "./loading-layout";
+import { Toaster } from "../ui/toaster";
 
 export const Layout = () => {
   const { state } = useNavigation();
@@ -17,6 +18,7 @@ export const Layout = () => {
         <Outlet />
       </main>
       <Footer />
+      <Toaster />
       <ScrollRestoration />
     </>
   );
