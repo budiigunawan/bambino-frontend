@@ -43,6 +43,7 @@ export const router = createBrowserRouter([
         ),
         path: "cart",
         errorElement: <ErrorPage />,
+        loader: Cart.loader,
       },
       {
         element: (

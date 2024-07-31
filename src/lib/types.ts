@@ -68,6 +68,23 @@ export type User = {
   updatedAt: string;
 };
 
+type CartItem = {
+  quantity: number;
+  cartId: string;
+  productId: string;
+  createdAt: string | null;
+  updatedAt: string | null;
+  product: Product;
+};
+
+export type Cart = {
+  id: string;
+  userId: string;
+  products: CartItem[];
+  createdAt: string;
+  updatedAt: string;
+};
+
 export type RegisterResponse = {
   code: number;
   status: string;
@@ -84,4 +101,10 @@ export type ProfileResponse = {
   code: number;
   status: string;
   user: User;
+};
+
+export type CartResponse = {
+  code: number;
+  status: string;
+  cart: Cart;
 };

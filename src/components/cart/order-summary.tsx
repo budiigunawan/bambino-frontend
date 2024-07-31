@@ -37,19 +37,27 @@ export const OrderSummary = ({ dataCart }: OrderSummaryParams) => {
   };
 
   const itemsCounter = useMemo(() => {
-    const counter = dataCart.products.reduce((sum, current) => {
-      return sum + current.quantity;
-    }, 0);
+    if (dataCart?.products?.length > 0) {
+      const counter = dataCart.products.reduce((sum, current) => {
+        return sum + current.quantity;
+      }, 0);
 
-    return counter;
+      return counter;
+    }
+
+    return 0;
   }, [dataCart]);
 
   const orderTotal = useMemo(() => {
-    const totalPrice = dataCart.products.reduce((sum, item) => {
-      return sum + item.quantity * +item.product.price;
-    }, 0);
+    if (dataCart?.products?.length > 0) {
+      const totalPrice = dataCart.products.reduce((sum, item) => {
+        return sum + item.quantity * +item.product.price;
+      }, 0);
 
-    return totalPrice;
+      return totalPrice;
+    }
+
+    return 0;
   }, [dataCart]);
 
   return (
@@ -72,6 +80,7 @@ export const OrderSummary = ({ dataCart }: OrderSummaryParams) => {
           type="button"
           className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light"
           onClick={handleCheckout}
+          disabled={!itemsCounter}
         >
           Checkout
         </Button>
