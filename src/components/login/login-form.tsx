@@ -12,9 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 
 export const LoginForm = () => {
+  const submit = useSubmit();
+
   const formSchema = z.object({
     email: z.string().email(),
     password: z.string().min(8),
@@ -28,8 +30,10 @@ export const LoginForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = (userData: z.infer<typeof formSchema>) => {
+    submit(userData, {
+      method: "post",
+    });
   };
 
   return (

@@ -51,6 +51,11 @@ export type UserDataRegister = {
   password?: string;
 };
 
+export type UserDataLogin = {
+  email?: string;
+  password?: string;
+};
+
 export type User = {
   id: string;
   email: string;
@@ -67,4 +72,10 @@ export type RegisterResponse = {
   code: number;
   status: string;
   newUser: User;
+};
+
+export type LoginResponse = {
+  code: number;
+  status: string;
+  token: User;
 };
