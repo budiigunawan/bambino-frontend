@@ -1,6 +1,8 @@
+import { addCartItem } from "@/api/checkout-api";
 import { getAllProduct, getProduct } from "@/api/products-api";
 import { Detail } from "@/components/product/detail";
 import { Recommendation } from "@/components/product/recommendation";
+import { authCookie } from "@/lib/auth";
 import { Product, ProductDetailPageData } from "@/lib/types";
 import { useMemo } from "react";
 import {
@@ -36,12 +38,23 @@ async function loader({ params }: { params: Params }) {
 }
 
 async function action({ request }: { request: Request }) {
-  const cartId = localStorage.getItem("cartId");
+  const token = authCookie.get("token");
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  const { quantity } = data;
 
-  if (cartId && quantity) {
+  if (token && data) {
+    const { quantity, productId } = data;
+    const payload = {
+      productId: productId as string,
+      quantity: Number(quantity),
+    };
+
+    const response = await addCartItem(token, payload);
+
+    if (response.code !== 201) {
+      return null;
+    }
+
     return redirect("/cart");
   } else {
     return redirect("/login");

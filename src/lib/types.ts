@@ -108,3 +108,14 @@ export type CartResponse = {
   status: string;
   cart: Cart;
 };
+
+export type AddToCart = {
+  productId: string;
+  quantity: number;
+};
+
+export type CartItemResponse = {
+  code: number;
+  status: string;
+  updatedCart: Cart;
+};

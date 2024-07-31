@@ -132,6 +132,14 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
                       +
                     </Button>
                   </div>
+                  <input
+                    type="text"
+                    id="productId"
+                    name="productId"
+                    defaultValue={product.id}
+                    readOnly
+                    className="hidden"
+                  />
                   <Button
                     type="submit"
                     className="mt-8 rounded-none h-12 w-full uppercase bg-b-pink-dark hover:bg-b-pink-light"

@@ -11,9 +11,7 @@ async function loader() {
   const token: string = authCookie.get("token");
 
   const response = await getCart(token);
-  return {
-    dataCart: response.cart,
-  };
+  return response.cart;
 }
 
 export const Cart = () => {

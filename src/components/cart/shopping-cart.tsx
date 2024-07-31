@@ -18,7 +18,9 @@ export const ShoppingCart = ({ cartItems }: ShoppingCartParams) => {
   return (
     <section className="col-span-12 lg:col-span-7">
       {cartItems?.length > 0 ? (
-        cartItems.map((item) => <CartItem dataItem={item} />)
+        cartItems.map((item) => (
+          <CartItem dataItem={item} key={item.productId} />
+        ))
       ) : (
         <p>Cart is empty</p>
       )}
