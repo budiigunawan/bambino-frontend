@@ -1,3 +1,4 @@
+import { authCookie } from "@/lib/auth";
 import { ReactNode } from "react";
 import { Navigate } from "react-router-dom";
 
@@ -6,10 +7,9 @@ type ProtectedRouteParams = {
 };
 
 export const ProtectedRoute = ({ children }: ProtectedRouteParams) => {
-  // TODO: CHANGE TO DYNAMIC VALUE
-  const isAuthenticated = true;
+  const token = authCookie.get("token");
 
-  if (!isAuthenticated) {
+  if (!token) {
     return <Navigate to="/login" />;
   }
 

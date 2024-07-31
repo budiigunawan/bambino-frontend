@@ -3,6 +3,7 @@ import { Home, Products, ProductDetail, Cart, ErrorPage } from "./index";
 import { Layout } from "@/components/layout/layout";
 import { Login } from "./login";
 import { Register } from "./register";
+import { Profile } from "./profile";
 import { ProtectedRoute } from "@/components/layout/protected-route";
 
 export const router = createBrowserRouter([
@@ -42,6 +43,16 @@ export const router = createBrowserRouter([
         ),
         path: "cart",
         errorElement: <ErrorPage />,
+      },
+      {
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
+        path: "profile",
+        errorElement: <ErrorPage />,
+        loader: Profile.loader,
       },
       {
         element: <Login />,

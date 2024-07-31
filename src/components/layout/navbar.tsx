@@ -6,22 +6,28 @@ import {
   MenubarMenu,
   MenubarTrigger,
 } from "@/components/ui/menubar";
-import { Form, Link, useSearchParams } from "react-router-dom";
+import { Form, Link, useNavigate, useSearchParams } from "react-router-dom";
 import { CiUser } from "react-icons/ci";
 import { IoIosSearch } from "react-icons/io";
 import { IoCartOutline, IoClose } from "react-icons/io5";
-import { useUserStore } from "@/stores";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { authCookie } from "@/lib/auth";
 
 export const Navbar = () => {
-  const user = useUserStore((state) => state.user);
+  const navigate = useNavigate();
+  const token = authCookie.get("token");
   const [isShowSearch, setIsShowSearch] = useState(false);
   const [searchParams] = useSearchParams();
   const querySearch = searchParams.get("q");
 
   const handleToggleSearch = () => {
     setIsShowSearch((isShowSearch) => !isShowSearch);
+  };
+
+  const handleLogout = () => {
+    authCookie.set("token", "");
+    navigate("/home");
   };
 
   return (
@@ -69,7 +75,7 @@ export const Navbar = () => {
                   </Button>
                 </MenubarMenu>
                 <MenubarMenu>
-                  {user ? (
+                  {token ? (
                     <>
                       <MenubarTrigger className="p-1">
                         <CiUser fontSize={"24px"} />
@@ -80,7 +86,7 @@ export const Navbar = () => {
                             Profile
                           </Link>
                         </MenubarItem>
-                        <MenubarItem>Logout</MenubarItem>
+                        <MenubarItem onClick={handleLogout}>Logout</MenubarItem>
                       </MenubarContent>
                     </>
                   ) : (

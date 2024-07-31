@@ -79,3 +79,9 @@ export type LoginResponse = {
   status: string;
   token: User;
 };
+
+export type ProfileResponse = {
+  code: number;
+  status: string;
+  user: User;
+};
