@@ -27,7 +27,7 @@ export const Navbar = () => {
 
   const handleLogout = () => {
     authCookie.set("token", "");
-    navigate("/home");
+    navigate("/");
   };
 
   return (
@@ -53,7 +53,7 @@ export const Navbar = () => {
           </Form>
         ) : (
           <>
-            <Link to={"/home"} className="py-2 flex items-center gap-1">
+            <Link to={"/"} className="py-2 flex items-center gap-1">
               <img
                 className="h-full"
                 src="/logo-square.png"
@@ -63,12 +63,26 @@ export const Navbar = () => {
                 Bambino
               </p>
             </Link>
-            <div className="py-4">
+            <div className="py-4 lg:w-5/12">
               <Menubar className="p-0 border-0 h-6 gap-3">
                 <MenubarMenu>
+                  <Form
+                    id="search-product"
+                    method="get"
+                    action="/products"
+                    className="w-full items-center space-x-1 hidden lg:flex"
+                  >
+                    <Input
+                      type="text"
+                      name="q"
+                      placeholder="🔍  Search by collection name"
+                      className="max-h-8 font-plus focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0"
+                      defaultValue={querySearch ?? undefined}
+                    />
+                  </Form>
                   <Button
                     variant={"ghost"}
-                    className="p-1"
+                    className="p-1 block lg:hidden"
                     onClick={handleToggleSearch}
                   >
                     <IoIosSearch fontSize={"24px"} />
@@ -81,11 +95,11 @@ export const Navbar = () => {
                         <CiUser fontSize={"24px"} />
                       </MenubarTrigger>
                       <MenubarContent>
-                        <MenubarItem>
+                        {/* <MenubarItem>
                           <Link to="/profile" className="w-full">
                             Profile
                           </Link>
-                        </MenubarItem>
+                        </MenubarItem> */}
                         <MenubarItem onClick={handleLogout}>Logout</MenubarItem>
                       </MenubarContent>
                     </>

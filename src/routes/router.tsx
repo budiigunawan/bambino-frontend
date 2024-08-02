@@ -13,7 +13,7 @@ export const router = createBrowserRouter([
     children: [
       {
         element: <Home />,
-        path: "home",
+        path: "/",
         errorElement: <ErrorPage />,
         loader: Home.loader,
       },
@@ -74,10 +74,6 @@ export const router = createBrowserRouter([
       {
         element: <Navigate to={"/error"} replace />,
         path: "*",
-      },
-      {
-        element: <Navigate to={"/home"} replace />,
-        path: "/",
       },
     ],
   },

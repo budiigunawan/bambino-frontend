@@ -48,7 +48,7 @@ export const Detail = ({ product, isLoading }: DetailParams) => {
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem>
-            <Link className="uppercase underline" to="/home">
+            <Link className="uppercase underline" to="/">
               Home
             </Link>
           </BreadcrumbItem>

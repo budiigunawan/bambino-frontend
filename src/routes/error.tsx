@@ -15,10 +15,7 @@ export const ErrorPage = () => {
           </p>
         </div>
         <div className="mt-4">
-          <Link
-            to={"/home"}
-            className="font-bold font-poppins text-lg underline"
-          >
+          <Link to={"/"} className="font-bold font-poppins text-lg underline">
             Bambino home page
           </Link>
         </div>

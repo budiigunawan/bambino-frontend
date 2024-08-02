@@ -22,7 +22,7 @@ async function action({ request }: ActionFunctionArgs) {
 
   authCookie.set("token", token);
 
-  return redirect("/home");
+  return redirect("/");
 }
 
 export const Login = () => {
