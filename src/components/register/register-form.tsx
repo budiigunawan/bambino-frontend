@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useSubmit } from "react-router-dom";
+import { Link, useSubmit } from "react-router-dom";
 
 export const RegisterForm = () => {
   const submit = useSubmit();
@@ -95,9 +95,17 @@ export const RegisterForm = () => {
                 </FormItem>
               )}
             />
-            <div className="pt-6 flex flex-col gap-3">
+            <div className="flex flex-col gap-3">
               <Button type="submit" className="uppercase">
                 Create an account
+              </Button>
+              <Button
+                type="button"
+                variant="outline"
+                className="uppercase"
+                asChild
+              >
+                <Link to="/login">Login</Link>
               </Button>
             </div>
           </form>
