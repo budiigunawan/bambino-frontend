@@ -4,11 +4,15 @@ import { OrderSummary } from "@/components/cart/order-summary";
 import { ShoppingCart } from "@/components/cart/shopping-cart";
 import { authCookie } from "@/lib/auth";
 import { Cart as CartType } from "@/lib/types";
-import { useLoaderData } from "react-router-dom";
+import { redirect, useLoaderData } from "react-router-dom";
 // import { Recommendation } from "@/components/product/recommendation";
 
 async function loader() {
   const token: string = authCookie.get("token");
+
+  if (!token) {
+    return redirect("/login");
+  }
 
   const response = await getCart(token);
   return response.cart;

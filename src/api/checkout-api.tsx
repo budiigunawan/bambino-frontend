@@ -22,8 +22,6 @@ export const getCart = async (token: string) => {
 
 export const addCartItem = async (token: string, cartItemData: AddToCart) => {
   try {
-    console.log("aci");
-
     const response = await axios({
       method: "POST",
       url: `${baseUrl}/carts/items`,

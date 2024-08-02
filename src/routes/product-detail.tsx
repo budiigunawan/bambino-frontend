@@ -1,4 +1,4 @@
-import { addCartItem } from "@/api/checkout-api";
+import { addCartItem, getCart } from "@/api/checkout-api";
 import { getAllProduct, getProduct } from "@/api/products-api";
 import { Detail } from "@/components/product/detail";
 import { Recommendation } from "@/components/product/recommendation";
@@ -49,9 +49,15 @@ async function action({ request }: { request: Request }) {
       quantity: Number(quantity),
     };
 
-    const response = await addCartItem(token, payload);
+    const cartResponse = await getCart(token);
 
-    if (response.code !== 201) {
+    if (cartResponse.status !== "success") {
+      return null;
+    }
+
+    const cartItemResponse = await addCartItem(token, payload);
+
+    if (cartItemResponse.code !== 201) {
       return null;
     }
 
